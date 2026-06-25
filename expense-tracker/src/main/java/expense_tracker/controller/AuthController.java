@@ -14,10 +14,10 @@ public class AuthController {
         this.userService = userService;
     }
 
-    @PostMapping("/register")
+    @PostMapping(value="/register", produces="text/plain")
     public String register(
             @RequestBody RegisterRequest request) {
-
+        System.out.println("REGISTER API CALLED");
         return userService.register(request);
     }
 }
