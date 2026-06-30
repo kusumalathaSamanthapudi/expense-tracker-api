@@ -21,12 +21,14 @@ public class UserService {
 
     public String register(RegisterRequest request) {
 
+        if (userRepository.findByEmail(request.getEmail()).isPresent()) {
+            throw new RuntimeException("Email already exists");
+        }
+
         User user = new User();
 
         user.setName(request.getName());
         user.setEmail(request.getEmail());
-
-        // Encrypt password before saving
         user.setPassword(passwordEncoder.encode(request.getPassword()));
 
         userRepository.save(user);

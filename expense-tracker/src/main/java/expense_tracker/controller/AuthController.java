@@ -2,6 +2,7 @@ package expense_tracker.controller;
 
 import expense_tracker.dto.RegisterRequest;
 import expense_tracker.service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -15,8 +16,7 @@ public class AuthController {
     }
 
     @PostMapping(value="/register", produces="text/plain")
-    public String register(
-            @RequestBody RegisterRequest request) {
+    public String register(@Valid @RequestBody RegisterRequest request) {
         System.out.println("REGISTER API CALLED");
         return userService.register(request);
     }
